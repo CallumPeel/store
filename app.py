@@ -1,6 +1,7 @@
 import uuid
 from flask import Flask, request
 from flask_smorest import abort
+
 from db import items, stores
 
 app = Flask(__name__)
@@ -90,8 +91,10 @@ def create_store():
     stores[store_id] = new_store
     return new_store, 201
 
+
 @app.get("/store")
 def get_stores():
+    return "Hello"
     return {"Stores": list(stores.values())}, 201
 
 
@@ -101,6 +104,7 @@ def get_store(store_id):
         return stores[store_id]
     except KeyError:
         abort(404, message="404 not found.")
+
 
 @app.delete("/store/<string:store_id>")
 def delete(store_id):
